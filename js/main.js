@@ -99,7 +99,7 @@ const sr = ScrollReveal({
 sr.reveal(`.home__data, .home__img, 
            .decoration__data,
            .accessory__content,
-           .footer__content`, {
+           .footer__content, .quenstion__content`, {
     origin: 'top',
     interval: 200,
 })
@@ -110,4 +110,48 @@ sr.reveal(`.share__img, .send__content`, {
 
 sr.reveal(`.share__data, .send__img`, {
     origin: 'right'
+})
+
+/*=============== QUESTIONS ACCORDION ===============*/
+const accordionItems = document.querySelectorAll('.questions__item')
+
+accordionItems.forEach((item) =>{
+    const accordionHeader = item.querySelector('.questions__header')
+
+    accordionHeader.addEventListener('click', () =>{
+        const openItem = document.querySelector('.accordion-open')
+
+        toggleItem(item)
+
+        if(openItem && openItem!== item){
+            toggleItem(openItem)
+        }
+    })
+})
+
+const toggleItem = (item) =>{
+    const accordionContent = item.querySelector('.questions__content')
+
+    if(item.classList.contains('accordion-open')){
+        accordionContent.removeAttribute('style')
+        item.classList.remove('accordion-open')
+    }else{
+        accordionContent.style.height = accordionContent.scrollHeight + 'px'
+        item.classList.add('accordion-open')
+    }
+
+}
+
+/*=============== POPUP ===============*/
+const popup = document.querySelector('.popup');
+const close = document.querySelector('.close');
+
+window.onload = function () {
+    setTimeout(function () {
+        popup.style.display = "block"
+    }, 5000)
+}
+
+close.addEventListener('click', () => {
+    popup.style.display = "none"
 })
